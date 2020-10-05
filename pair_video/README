@@ -1,0 +1,12 @@
+credits: https://codelabs.developers.google.com/codelabs/webrtc-web
+code derived from: https://github.com/googlecodelabs/webrtc-web/blob/master/step-05
+
+This is a simple video-chat(one-to-one) application
+use WebRTC WITHOUT peerjs to establish a peer-to-peer connection
+
+description::
+- in the main directory (...../pair_video) run "npm run dev-start" to launch the signaling server on local
+- accessing the main page (localhost:8080) will query a name for "chatroom"
+- once the name is accepted, a chat room will open with local video
+- open another tab at localhost:8080 and input the same "chatroom" name will connect to the previous "user"
+- if another user (opening another tab), try to connect to the same room, the connection will not happen (room size is limited to 2)
