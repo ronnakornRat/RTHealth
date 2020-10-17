@@ -43,7 +43,7 @@ navigator.mediaDevices.getUserMedia({
 socket.on('user-disconnected', userId => {
     console.log(userId)
     // close the call to the disconnected user
-    if(peers[userId]) {
+    if (peers[userId]) {
         peers[userId].close()
     }
 })
@@ -86,5 +86,11 @@ function exit_room() {
 }
 
 function pause_unpause() {
-    myVideo.srcObject.getTracks.forEach(t => t.enabled = !t.enabled)
+    myVideo.srcObject.getTracks().forEach(t => t.enabled = !t.enabled)
+    var button = document.getElementById("pause_button");
+    if (button.innerHTML === "pause") {
+        button.innerHTML = "unpause";
+    } else {
+        button.innerHTML = "pause";
+    }
 }

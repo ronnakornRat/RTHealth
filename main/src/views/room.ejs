@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,12 +12,12 @@
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="script.js" defer></script>
 
-    <title>Document</title> 
+    <title>Document</title>
 
 
     <style>
         #video-grid {
-            display:grid;
+            display: grid;
             grid-template-columns: repeat(auto-fill, 300px);
             grid-auto-rows: 300px;
         }
@@ -28,10 +29,13 @@
         }
     </style>
 </head>
+
 <body>
     <div id="video-grid"></div>
     <div id="footer">
+        <button id="pause_button" onclick="pause_unpause()">pause</button>
         <button onclick="exit_room()">exit</button>
     </div>
 </body>
+
 </html>
