@@ -35,7 +35,9 @@ navigator.mediaDevices.getUserMedia({
     })
     // when new user is connected (received the broadcast from server)
     socket.on('user-connected', userId => {
-        connnectToNewUser(userId, stream)
+        setTimeout(() => { //added timeot so both users can connect, if no timeout sometimes second video won't show
+          connectToNewUser(userId, stream);
+        }, 3000);
     })
 })
 
