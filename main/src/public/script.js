@@ -48,6 +48,12 @@ socket.on('user-disconnected', userId => {
     }
 })
 
+socket.on('full', roomId => {
+    console.log(roomId)
+    alert("Sorry, room: " + roomId + " is currently full")
+    window.location.href = "/"
+})
+
 myPeer.on('open', id => {
     socket.emit('join-room', ROOM_ID, id)
 })
