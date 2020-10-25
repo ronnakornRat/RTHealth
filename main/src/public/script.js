@@ -4,9 +4,6 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 
-
-
-
 // use peerjs to generate a userId for us
 const myPeer = new Peer(undefined, {
     host: '/',
@@ -22,7 +19,8 @@ myVideo.muted = true
 const peers = {}
 
 // connection for sending text
-var conn_text
+var in_conn_text    // channel from caller -> callee
+var out_conn_text   // channel from callee -> caller
 
 // connect our video
 navigator.mediaDevices.getUserMedia({
@@ -36,6 +34,7 @@ navigator.mediaDevices.getUserMedia({
         // send our own stream to whoever is calling
         call.answer(stream)
         const video = document.createElement('video')
+        // caller has sent his/her stream, append it to the grid
         call.on('stream', userVideoStream => {
             addVideoStream(video, userVideoStream)
         })
@@ -43,6 +42,7 @@ navigator.mediaDevices.getUserMedia({
     // when new user is connected (received the broadcast from server)
     socket.on('user-connected', userId => {
         connnectToNewUser(userId, stream)
+        connect_text(userId)
     })
 })
 
@@ -65,13 +65,13 @@ myPeer.on('open', id => {
     socket.emit('join-room', ROOM_ID, id)
 })
 
-// receiving
+// receiving text connection
 myPeer.on('connection', function (conn) {
     conn.on('data', function (data) {
-        // Will print 'hi!'
         console.log(data);
         document.getElementById("text_message").innerText = data
     });
+    out_conn_text = conn
 });
 
 // take video stream and append it to the videogrid
@@ -99,12 +99,12 @@ function connnectToNewUser(userId, stream) {
     
 
     // chat connection
-    conn_text = myPeer.connect(userId);
-    conn_text.on('open', function () {
-        console.log("sending message");
-        // here you have conn.id
-        conn_text.send('hi!');
-    });
+    // out_conn_text = myPeer.connect(userId);
+    // out_conn_text.on('open', function () {
+    //     console.log("sending message");
+    //     // here you have conn.id
+    //     out_conn_text.send('hi!');
+    // });
     
     //remove new user video when the call is ended
     call.on('close', () => {
@@ -131,8 +131,22 @@ function pause_unpause() {
     }
 }
 
+function connect_text(userId) {
+    out_conn_text = myPeer.connect(userId);
+    out_conn_text.on('open', function () {
+        console.log("sending message");
+        // here you have conn.id
+        // out_conn_text.send('hi!');
+    });
+
+    out_conn_text.on('data', function (data) {
+        console.log(data);
+        document.getElementById("text_message").innerText = data
+    });
+}
+
 function send_message() {
     var message = document.getElementById("chat_text_input").value;
     document.getElementById("chat_text_input").value = ""
-    conn_text.send(message);
+    out_conn_text.send(message);
 }
