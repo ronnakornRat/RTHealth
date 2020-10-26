@@ -1,6 +1,5 @@
 // client side of the application
 
-
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 
@@ -44,6 +43,7 @@ navigator.mediaDevices.getUserMedia({
         connnectToNewUser(userId, stream)
         connect_text(userId)
     })
+    // caller - callee
 })
 
 // when new user is disconnected (received the broadcast from server)
@@ -69,7 +69,10 @@ myPeer.on('open', id => {
 myPeer.on('connection', function (conn) {
     conn.on('data', function (data) {
         console.log(data);
-        document.getElementById("text_message").innerText = data
+        // do stuff to "data"
+        // document.getElementById("text_message").innerText = data
+        document.getElementById("text_message").innerHTML = data
+        // 
     });
     out_conn_text = conn
 });
@@ -140,8 +143,10 @@ function connect_text(userId) {
     });
 
     out_conn_text.on('data', function (data) {
+        // do stuff with "data"
         console.log(data);
-        document.getElementById("text_message").innerText = data
+        // document.getElementById("text_message").innerText = data
+        document.getElementById("text_message").innerHTML= data
     });
 }
 
@@ -150,3 +155,4 @@ function send_message() {
     document.getElementById("chat_text_input").value = ""
     out_conn_text.send(message);
 }
+

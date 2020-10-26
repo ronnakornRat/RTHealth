@@ -49,5 +49,11 @@ io.on('connection', socket => {
 
     })
 
+    socket.on('check', (roomId) => {
+        var clientsInRoom = io.sockets.adapter.rooms[roomId];
+        var numClients = clientsInRoom ? Object.keys(clientsInRoom.sockets).length : 0;
+        socket.emit('returncheck', numClients);
+    })
+
 })
 server.listen(3000)
