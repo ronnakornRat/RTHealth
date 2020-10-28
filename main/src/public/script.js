@@ -27,6 +27,30 @@ navigator.mediaDevices.getUserMedia({
     audio: true
 }).then(stream => {
     addVideoStream(myVideo, stream)
+    var btn = document.createElement("BUTTON");
+    btn.innerHTML = "1080p"; 
+    btn.addEventListener('click', function (){
+        changeres("1080px", "1920");
+    });
+    var btn2 = document.createElement("BUTTON");
+    btn2.innerHTML = "240p"; 
+    btn2.addEventListener('click', function (){
+        changeres("240px", "320");
+    });
+    var btn3 = document.createElement("BUTTON");
+    btn3.innerHTML = "480p"; 
+    btn3.addEventListener('click', function (){
+        changeres("480px", "640");
+    });
+    var btn4 = document.createElement("BUTTON");
+    btn4.innerHTML = "720p"; 
+    btn4.addEventListener('click', function (){
+        changeres("720px", "1280");
+    });
+    document.getElementById('buttons').append(btn2);
+    document.getElementById('buttons').append(btn3);
+    document.getElementById('buttons').append(btn4);
+    document.getElementById('buttons').append(btn);
 
     // people in the room is calling us
     myPeer.on('call', call => {
@@ -40,11 +64,11 @@ navigator.mediaDevices.getUserMedia({
     })
     // when new user is connected (received the broadcast from server)
     socket.on('user-connected', userId => {
-        connnectToNewUser(userId, stream)
-        connect_text(userId)
-    })
-    // caller - callee
-})
+        setTimeout(() => {
+          connectToNewUser(userId, stream);
+        }, 3000);
+      });
+    });
 
 // when new user is disconnected (received the broadcast from server)
 socket.on('user-disconnected', userId => {
@@ -156,3 +180,10 @@ function send_message() {
     out_conn_text.send(message);
 }
 
+function changeres(h, w){
+    let x = "repeat(auto-fill," + w + "px)";
+    console.log(x);
+    document.getElementById('video-grid').style.gridTemplateColumns = x;
+    document.getElementById('video-grid').style.gridAutoRows = h;
+    
+}
