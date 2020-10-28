@@ -9,6 +9,7 @@
         const ROOM_ID = "<%= roomId %>"
     </script>
     <script src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@4.3.3/dist/handlebars.min.js" defer></script>
     <script src="/socket.io/socket.io.js" defer></script>
     <script src="script.js" defer></script>
 
@@ -32,6 +33,11 @@
 
 <body>
     <div id="video-grid"></div>
+    <div id="textchat">
+        <p id="text_message" ></p>
+        <input type="text" id="chat_text_input" placeholder="Type you message">
+        <button onclick="send_message()">send</button>
+    </div>
     <div id="footer">
         <button id="pause_button" onclick="pause_unpause()">pause</button>
         <button onclick="exit_room()">exit</button>
