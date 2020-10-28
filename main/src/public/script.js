@@ -111,8 +111,7 @@ function addVideoStream(video, stream) {
     videoGrid.append(video)
 }
 
-
-function connnectToNewUser(userId, stream) {
+function connectToNewUser(userId, stream) {
 
     console.log("connnectToNewUser")
 
