@@ -66,6 +66,7 @@ navigator.mediaDevices.getUserMedia({
     socket.on('user-connected', userId => {
         setTimeout(() => {
           connectToNewUser(userId, stream);
+          connect_text(userId)
         }, 3000);
       });
     });
