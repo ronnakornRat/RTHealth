@@ -66,7 +66,6 @@ navigator.mediaDevices.getUserMedia({
     socket.on('user-connected', userId => {
         setTimeout(() => {
           connectToNewUser(userId, stream);
-          connect_text(userId)
         }, 3000);
       });
     });
@@ -111,7 +110,8 @@ function addVideoStream(video, stream) {
     videoGrid.append(video)
 }
 
-function connectToNewUser(userId, stream) {
+
+function connnectToNewUser(userId, stream) {
 
     console.log("connnectToNewUser")
 
