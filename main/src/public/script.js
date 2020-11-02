@@ -169,7 +169,7 @@ function connect_text(userId) {
         // do stuff with "data"
         console.log(data);
         // document.getElementById("text_message").innerText = data
-        document.getElementById("text_message").innerHTML = data
+        append_message("remote", data)
     });
 }
 
