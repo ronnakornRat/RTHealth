@@ -2,11 +2,12 @@
 <html lang="en">
 
 <head>
-	
+
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+		integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 	<!-- Bootstrap CSS -->
 	<script>
 		const ROOM_ID = "<%= roomId %>"
@@ -29,71 +30,136 @@
 		video {
 			width: 100%;
 			object-fit: cover;
-}
-		#othervid video{
-			height: 100vh;
-		}
-		.container{
-			max-width: 100%;
-		}
-		#text-chat{
-			height: 30vh;
-		}
-		#othervid{
-			height: 100vh;
-		}
-		#whole-chat{
-			height: 80%;
-			overflow-y:auto;
-		}
-		#msg_txt{
-			height: 10%;
-		}
-		#footer{
-			padding-top: 10vh;
 		}
 
+		#othervid video {
+			height: 100vh;
+		}
+
+		.container {
+			max-width: 100%;
+		}
+
+		#text-chat {
+			height: 30vh;
+			margin-top: 5vh;	
+		}
+
+		#othervid {
+			height: 100vh;
+		}
+
+		#whole-chat {
+			height: 80%;
+			overflow-y: auto;
+			
+			/* border-style: solid;
+			border-color: #ededed;
+			border-width: 5px; */
+			
+		}
+
+		#msg_txt {
+			height: 10%;
+		}
+
+		#footer {
+			padding-top: 10vh;
+		}
 	</style>
 </head>
 
 <body>
-	<div class = "container">
-		<div class = "row">
-			<div class ="col-6">
+	<div class="container">
+		<div class="row">
+			<div class="col-6">
 				<div class="row" id="myvid">
 				</div>
-				<div class="row" id= "text-chat">
+				<div class="row" id="text-chat">
 					<div class="col-12" id="whole-chat">
-					<div id="chatbox">
-						<p id = "text"> </p>
-					</div>
+						<!-- <div class="overflow-auto" style="max-width: 540px; max-height: 200px;"> -->
+							<table id="message_board" class="table">
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+								<tr>
+									<td>name</td>
+									<td>testing message</td>
+								</tr>
+							</table>
+						
 					</div>
 					<div class="col-12" id="msg_txt">
-					<input type="text" id="chat_text_input" placeholder="Type you message">
-					<button onclick="send_message()">send</button>
+						<input type="text" id="chat_text_input" placeholder="Type you message">
+						<button onclick="send_message()">send</button>
 					</div>
 				</div>
 
 			</div>
 			<div class="col-6" id="othervid">
 			</div>
-			
+
 
 		</div>
+		
 		<div class="row">
-		<div  id="footer">
+			<div id="footer">
 				<button id="pause_button" onclick="pause_unpause()">pause</button>
 				<button onclick="exit_room()">exit</button>
 			</div>
+		</div>
+		<div class="row">
+			<div id="res_buttons">
+				<div class="btn-group" id="res_buttons">
+					<button type="button" class="btn btn-primary" onclick="changeres('240px', '320')">240p</button>
+					<button type="button" class="btn btn-primary" onclick="changeres('480px', '640')">480p</button>
+					<button type="button" class="btn btn-primary" onclick="changeres('720px', '1280')">720p</button>
+					<button type="button" class="btn btn-primary" onclick="changeres('1080px', '1920')">1080p</button>
+				</div>
 			</div>
-			<div class="row">
-			<div id = 'buttons'></div>
 		</div>
 	</div>
 
 	<!-- Bootstrap code -->
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+		integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+		crossorigin="anonymous"></script>
 	<!-- Bootstrap code -->
 </body>
 
