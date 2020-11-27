@@ -15,6 +15,13 @@ app.get('/', (req, res) => {
     res.redirect(`/${uuidV4()}`)
 })
 
+app.get('/login', (req, res) => {
+    // create a 'room' when received GET request to home directory
+    // also append a random url using uuid
+    res.render('login')
+    res.redirect(`/${uuidV4()}`)
+})
+
 app.get('/:room', (req, res) => {
     // this 'room' is the dynamic url
     res.render('room', { roomId: req.params.room })

@@ -191,9 +191,6 @@ function send_message() {
         out_conn_text.send(message);
         append_message("local", message)
     }
-
-    document.getElementById("chat_text_input").value = ""
-    out_conn_text.send(message);
 }
 
 function append_message(name, message) {
