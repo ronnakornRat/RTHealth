@@ -1,5 +1,4 @@
 const socket = io('/')
-$(document).ready(verify_token())
 
 function get_room_name() {
     var room_name = document.getElementById("room_text_input").value;
@@ -23,13 +22,13 @@ function get_room_name() {
 
 function verify_token() {
     g_user_id = localStorage.getItem("g_user_id")
-    console.log("verifying otken for user ")
+    console.log("verifying token for user ")
     const database_url = 'http://127.0.0.1:5000/'
+    const uri = database_url + '/google/' + g_user_id + '/verify'
     $.ajax({
-        type: 'POST',
+        type: 'GET',
         // crossDomain: true,
         dataType: 'json',
-        data: {idtoken : id_token},
         url: uri,
         success: function (response) {
             console.log('response: ' + JSON.stringify(response))
@@ -47,3 +46,6 @@ function verify_token() {
     //     alert("Data: " + data + "\nStatus: " + status);
     // });
 }
+
+$(document).ready(verify_token())
+
