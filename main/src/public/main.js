@@ -22,30 +22,60 @@ function get_room_name() {
 
 function verify_token() {
     g_user_id = localStorage.getItem("g_user_id")
+    // check for g_user_id
+
+
     console.log("verifying token for user ")
     const database_url = 'http://127.0.0.1:5000/'
     const uri = database_url + '/google/' + g_user_id + '/verify'
     $.ajax({
         type: 'GET',
-        // crossDomain: true,
+        crossDomain: true,
         dataType: 'json',
         url: uri,
         success: function (response) {
             console.log('response: ' + JSON.stringify(response))
             console.log('data: ' + response.data)
             console.log('status: ' + response.status)
+            // store google user_id in local
+            localStorage.setItem("g_user_id", response.data);
             if(response.status != 'ok') {
-                // store google user_id in local
-                localStorage.setItem("g_user_id", response.data);
-                window.location.href = "/login"
+                
+                
+                // window.location.href = "/login"
             }
+
+            
         }
+
+        
     })
 
-    // $.get(database_url + '/test', function (data, status) {
-    //     alert("Data: " + data + "\nStatus: " + status);
-    // });
 }
 
-$(document).ready(verify_token())
+function signOut() {
+    
+    console.log('google logout');
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
+
+$(window).on('load', function(){
+    console.log("ready")
+    gapi.load('auth2', function() {
+        gapi.auth2.init();
+        
+        var valid = gapi.auth2.getAuthInstance().isSignedIn.get()
+        if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
+            // if user is not signed in
+            console.log("user not signed in " + valid)
+            // window.location.href = "/login"
+        }
+
+        verify_token()
+      });
+  });
+  
 

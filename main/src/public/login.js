@@ -14,7 +14,6 @@ function onSignIn(googleUser) {
     // send id_token to backend
     const database_url = 'http://127.0.0.1:5000/' // << change database URI here
     // https POST, for now
-    var xhr = new XMLHttpRequest();
     var uri = encodeURI(database_url + '/users/' + user_name + '/login'); // << change database URI here
 
     // xhr.open('POST', uri); 
@@ -27,7 +26,7 @@ function onSignIn(googleUser) {
     // using ajax
     $.ajax({
         type: 'POST',
-        // crossDomain: true,
+        crossDomain: true,
         dataType: 'json',
         data: {idtoken : id_token},
         url: uri,
@@ -42,12 +41,6 @@ function onSignIn(googleUser) {
             }
         }
     })
-
-    // 
-
-    // verify the token ==>
-    // verify_token(id_token)
-    // THOUGHT: verify from client side or server side?
 
 }
 

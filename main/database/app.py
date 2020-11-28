@@ -5,6 +5,7 @@
 from datetime import datetime
 import sys
 import json
+import os
 
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
@@ -18,7 +19,8 @@ from google.auth.transport import requests
 import urllib.parse
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.testsqlite'
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///db.testsqlite'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 CORS(app)
@@ -145,6 +147,7 @@ def register_token(token, username=''):
                     user_id=idinfo['sub'], session_token=token)
         db.session.add(user)
         db.session.commit()
+
         ret_val['data'] = userid
         ret_val['status'] = 'ok'
         ret_val['action'] = 'make new user'
@@ -181,10 +184,15 @@ def verify_token(user_id):
             userid = idinfo['sub']
             # check google id
             if user.user_id == userid:
-                ret_val['status'] = 'ok'
+                # check issuer
+                if idinfo['iss'] == "accounts.google.com" or idinfo['iss'] == "https://accounts.google.com":
+                    # check audience
+                    if idinfo['aud'] == CLIENT_ID:
+                        ret_val['status'] = 'ok'
+                        # need to check expiry date
             # TO DO: check expiration time
 
-            # print(json.dumps(idinfo, indent=4, sort_keys=True), file=sys.stderr)
+            print(json.dumps(idinfo, indent=4, sort_keys=True), file=sys.stderr)
             ret_val = {'data': userid,
                     'status': 'ok',
                     'action': 'verify token'
