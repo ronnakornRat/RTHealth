@@ -131,3 +131,7 @@ dmypy.json
 node_modules
 migrations
 db.testsqlite
+
+# testing
+pair_video
+simple_video

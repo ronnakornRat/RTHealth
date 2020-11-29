@@ -48,8 +48,6 @@ class Session(db.Model):
         db.String(80), db.ForeignKey('user.id'), nullable=False)
 
 # for admin use
-
-
 @app.route('/users', methods=['GET', 'POST'])
 def all_users():
     if request.method == 'GET':
@@ -75,8 +73,6 @@ def all_users():
     return 'unknown error'
 
 # managing user data
-
-
 @app.route('/users/<username>', methods=['GET', 'POST', 'DELETE'])
 def get_user(username):
     user = User.query.filter_by(username=username).first()
