@@ -19,7 +19,6 @@ from google.auth.transport import requests
 import urllib.parse
 
 app = Flask(__name__)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///db.testsqlite'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -43,9 +42,9 @@ class User(db.Model):
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     participant1 = db.Column(
-        db.String(80), db.ForeignKey('user.id'), nullable=False)
+        db.String(80), db.ForeignKey('user.username'), nullable=False)
     participant2 = db.Column(
-        db.String(80), db.ForeignKey('user.id'), nullable=False)
+        db.String(80), db.ForeignKey('user.username'), nullable=False)
 
 # for admin use
 
