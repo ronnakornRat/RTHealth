@@ -1,1 +1,1 @@
-web: FLASK_APP=app.py flask run
+web: FLASK_APP=database/app.py flask run
