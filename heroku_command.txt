@@ -5,7 +5,7 @@ heroku ps:scale api=1 --remote ec601-database
 ### push to heroku main from heroku branch
 git push <remote name> <branch name>:main
 # which is
-git push rthealth-backend frontend:main
+git push heroku frontend:main
 
 git subtree push --prefix backend heroku-app-backend master
 
