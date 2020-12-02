@@ -5,8 +5,10 @@ var videoGrid;
 
 // use peerjs to generate a userId for us
 const myPeer = new Peer(undefined, {
-    host: '/',
-    port: '3001'
+    // host: '/',
+    host: 'ec601-rthealth-peerserver.herokuapp.com',
+    port: '443',
+    secure: true
 })
 
 const myVideo = document.createElement('video')

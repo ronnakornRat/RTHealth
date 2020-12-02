@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev-start": "cd src && nodemon server.js",
-    "server" : "cd src && node server.js"
+    "server": "cd src && node server.js"
   },
   "keywords": [],
   "author": "",
