@@ -32,7 +32,7 @@ class User(db.Model):
     user_id = db.Column(db.String(30), unique=True,
                         nullable=False, default='user')
     session_token = db.Column(
-        db.String(100), unique=True, nullable=False,  default='token')
+        db.String(1100), unique=True, nullable=False,  default='token')
     time_created = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
