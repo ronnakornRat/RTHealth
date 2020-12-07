@@ -78,6 +78,7 @@ def all_users():
 
 @app.route('/users/<username>', methods=['GET', 'POST', 'DELETE'])
 def get_user(username):
+    print("access user:username = ", username)
     user = User.query.filter_by(username=username).first()
     if request.method == 'GET':
         # get 1 user
@@ -107,6 +108,7 @@ def get_user(username):
 
 @app.route('/users/<username>/login', methods=['POST'])
 def login(username):
+    print("access login:username = ", username)
     # check if user exist in database
     decode_username = urllib.parse.unquote(username)
     print('login: user =', username, file=sys.stderr)
@@ -163,6 +165,7 @@ def register_token(token, username=''):
 
 @app.route('/google/<user_id>/verify', methods=['GET'])
 def verify_token(user_id):
+    print("access verify_token")
     CLIENT_ID = "1044675055259-dtg2j9c75uuapbu73qukltu25ptuirql.apps.googleusercontent.com"
 
     ret_val = {'data': '',
