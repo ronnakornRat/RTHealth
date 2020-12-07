@@ -1,1 +1,1 @@
-web: python database/manage.py runserver --host 0.0.0.0 --port ${PORT}
+web: python database/manage.py migrate; python database/manage.py upgrade; python database/manage.py runserver --host 0.0.0.0 --port ${PORT}

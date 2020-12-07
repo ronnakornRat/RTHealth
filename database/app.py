@@ -19,8 +19,7 @@ from google.auth.transport import requests
 import urllib.parse
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yljgufadxoujai:2e3134bd79ba0fdcefaa1e1782cb95b5e93563702747a5dedeef0b28c9e213bf@ec2-52-44-139-108.compute-1.amazonaws.com:5432/d5jhlgs9kaevtj'
-# os.environ.get('DATABASE_URL') or 'sqlite:///db.testsqlite'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///db.testsqlite'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 CORS(app)
