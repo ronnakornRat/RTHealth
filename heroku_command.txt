@@ -1,12 +1,7 @@
-### tell Heroku to run actual web application on one Heroku app, and API service on another Heroku app
-heroku ps:scale web=1 --remote ec601-rthealth
-heroku ps:scale api=1 --remote ec601-database
+### switching remote heroku to current app
+heroku git:remote -a ec601-rthealth
 
 ### push to heroku main from heroku branch
 git push <remote name> <branch name>:main
 # which is
 git push heroku frontend:main
-
-git subtree push --prefix backend heroku-app-backend master
-
-ec601-rthealth-backend

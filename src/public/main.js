@@ -26,7 +26,7 @@ function verify_token() {
 
 
     console.log("verifying token for user ")
-    const database_url = 'http://127.0.0.1:5000/'
+    const database_url = 'https://ec601-database.herokuapp.com/'
     const uri = database_url + '/google/' + g_user_id + '/verify'
     $.ajax({
         type: 'GET',
