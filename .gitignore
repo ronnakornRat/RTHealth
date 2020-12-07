@@ -129,5 +129,4 @@ dmypy.json
 .pyre/
 
 node_modules
-migrations
 db.testsqlite
