@@ -1,1 +1,1 @@
-web: FLASK_APP=database/app.py flask run
+web: python database/manage.py runserver --host 0.0.0.0 --port ${PORT}
