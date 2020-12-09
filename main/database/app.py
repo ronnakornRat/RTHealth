@@ -19,7 +19,6 @@ from google.auth.transport import requests
 import urllib.parse
 
 app = Flask(__name__)
-
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL') or 'sqlite:///db.testsqlite'
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -33,7 +32,7 @@ class User(db.Model):
     user_id = db.Column(db.String(30), unique=True,
                         nullable=False, default='user')
     session_token = db.Column(
-        db.String(100), unique=True, nullable=False,  default='token')
+        db.Text(), unique=True, nullable=False,  default='token')
     time_created = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
@@ -43,9 +42,9 @@ class User(db.Model):
 class Session(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     participant1 = db.Column(
-        db.String(80), db.ForeignKey('user.id'), nullable=False)
+        db.String(80), db.ForeignKey('user.username'), nullable=False)
     participant2 = db.Column(
-        db.String(80), db.ForeignKey('user.id'), nullable=False)
+        db.String(80), db.ForeignKey('user.username'), nullable=False)
 
 # for admin use
 
@@ -79,6 +78,7 @@ def all_users():
 
 @app.route('/users/<username>', methods=['GET', 'POST', 'DELETE'])
 def get_user(username):
+    print("access user:username = ", username)
     user = User.query.filter_by(username=username).first()
     if request.method == 'GET':
         # get 1 user
@@ -108,6 +108,7 @@ def get_user(username):
 
 @app.route('/users/<username>/login', methods=['POST'])
 def login(username):
+    print("access login:username = ", username)
     # check if user exist in database
     decode_username = urllib.parse.unquote(username)
     print('login: user =', username, file=sys.stderr)
@@ -164,6 +165,7 @@ def register_token(token, username=''):
 
 @app.route('/google/<user_id>/verify', methods=['GET'])
 def verify_token(user_id):
+    print("access verify_token")
     CLIENT_ID = "1044675055259-dtg2j9c75uuapbu73qukltu25ptuirql.apps.googleusercontent.com"
 
     ret_val = {'data': '',
@@ -223,4 +225,5 @@ def update_token(username, token):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    print("running main")
+    app.run()

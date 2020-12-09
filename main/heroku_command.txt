@@ -1,0 +1,7 @@
+### switching remote heroku to current app
+heroku git:remote -a ec601-database
+
+### push to heroku main from heroku branch
+git push <remote name> <branch name>:main
+# which is
+git push heroku backend:main

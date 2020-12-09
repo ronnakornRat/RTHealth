@@ -12,7 +12,7 @@ function onSignIn(googleUser) {
     var user_name = profile.getName()
     console.log('token: ' + id_token);
     // send id_token to backend
-    const database_url = 'http://127.0.0.1:5000/' // << change database URI here
+    const database_url = 'https://ec601-database.herokuapp.com/' // << change database URI here
     // https POST, for now
     var uri = encodeURI(database_url + '/users/' + user_name + '/login'); // << change database URI here
 
