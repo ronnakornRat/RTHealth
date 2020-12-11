@@ -1,30 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- google stuff -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="1044675055259-dtg2j9c75uuapbu73qukltu25ptuirql.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+        content="1044675055259-dtg2j9c75uuapbu73qukltu25ptuirql.apps.googleusercontent.com">
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
     <script src="login.js" defer></script>
 
-    <title>Login RTHealth</title> 
+    <title>Login RTHealth</title>
+
+    <style>
+        .abcRioButton.abcRioButtonLightBlue {
+            margin: 0 auto;
+            height: 72px;
+            width: 240px;
+        }
+
+        body {
+            background-color: ;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+    </style>
 
 
-    
 </head>
+
 <body>
-    <div id="header">
+    <!-- <div id="header">
         <h1>Welcome to RTHealth</h1>
+    </div> -->
+
+    <nav class="navbar navbar-light min-vh-90" style="background-color: #2894e6;">
+        <div class="container-fluid">
+            <span class="navbar-brand mx-auto h0" style="color: aliceblue;">Welcome to RTHealth</span>
+        </div>
+    </nav>
+    <div class="container-fluid min-vh-90">
+        <div class="container-fluid" style="position: absolute;top: 50%;">
+            <!-- google login button -->
+            <div class="g-signin2" style="margin: auto;" data-width="240" data-height="48" data-onsuccess="onSignIn">
+            </div>
+        </div>
     </div>
 
-    <!-- google login button -->
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
-    <button onclick="signOut()">signout</button>
-    
+
+
+
+    <!-- <button onclick="signOut()">signout</button> -->
+
 </body>
+
+
+
 </html>

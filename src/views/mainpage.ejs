@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,31 +9,44 @@
     <script src="/socket.io/socket.io.js" defer></script>
     <!-- google -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <meta name="google-signin-client_id" content="1044675055259-dtg2j9c75uuapbu73qukltu25ptuirql.apps.googleusercontent.com">
+    <meta name="google-signin-client_id"
+        content="1044675055259-dtg2j9c75uuapbu73qukltu25ptuirql.apps.googleusercontent.com">
 
     <!-- jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+
     <script src="main.js" defer></script>
 
-    <title>Document</title> 
+    <title>Document</title>
 
 
-    
+
 </head>
+
 <body>
-    <div id="header">
-        <h1>This is RTHealth</h1>
-    </div>
-
-    <div id="mid">
-        <div id="room_input">
-            <input type="text" id="room_text_input" placeholder="enter room name here">
-            <button onclick="get_room_name()">enter</button>
+    <nav class="navbar navbar-light" style="background-color: #2894e6;">
+        <div class="container-fluid">
+            <div class="mx-auto" id="header">
+                <h1 style="color: aliceblue;">This is RTHealth</h1>
+                <button class="btn btn-light btn-outline-success btn-lg" onclick="signOut()" style= "position: absolute; top: 0; right: 0; margin: 10px;">signout</button>
+            </div>
         </div>
-    </div>
+    </nav>
 
-    <button onclick="signOut()">signout</button>
-    
+
+    <div class="container-fluid min-vh-90" style="position: absolute;top: 50%;">
+            <div class="input-group">
+                <input type="text" class="form-control" id="room_text_input" placeholder="enter room name here" aria-label="room name with button addons">
+                <button class="btn btn-outline-secondary" onclick="get_room_name()" type="button">Enter</button>
+            </div>
+    </div>
 </body>
+
 </html>
