@@ -88,7 +88,7 @@ function isUserIn() {
     console.log("does user signed in? " + valid)
     if(!valid) {
         console.log("user not signed in.")
-        window.location.href = "/login"
+        // window.location.href = "/login"
     }
     else {
         verify_token()
