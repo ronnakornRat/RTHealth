@@ -1,4 +1,5 @@
 const socket = io('/')
+CLIENT_ID = "1044675055259-dtg2j9c75uuapbu73qukltu25ptuirql"
 
 function get_room_name() {
     var room_name = document.getElementById("room_text_input").value;
@@ -27,6 +28,7 @@ function verify_token() {
 
     console.log("verifying token for user ")
     const database_url = 'https://ec601-database.herokuapp.com/'
+    // const database_url = ' http://127.0.0.1:5000/'
     const uri = database_url + '/google/' + g_user_id + '/verify'
     $.ajax({
         type: 'GET',
@@ -39,22 +41,15 @@ function verify_token() {
             console.log('status: ' + response.status)
             // store google user_id in local
             localStorage.setItem("g_user_id", response.data);
-            if(response.status != 'ok') {
-                
-                
-                // window.location.href = "/login"
+            if (response.status != 'ok') {
+                window.location.href = "/login"
             }
-
-            
         }
-
-        
     })
-
 }
 
 function signOut() {
-    
+
     console.log('google logout');
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
@@ -62,20 +57,39 @@ function signOut() {
     });
 }
 
-$(window).on('load', function(){
+function onLibraryLoaded() {
+    gapi.load('auth2', function () {
+        gapi.auth2.init({
+            client_id: CLIENT_ID + '.apps.googleusercontent.com',
+            scope: 'profile'
+        })
+    })
+}
+
+
+
+$(window).on('load', function () {
     console.log("ready")
-    gapi.load('auth2', function() {
-        gapi.auth2.init();
+    gapi.load('auth2', function () {
+        gapi.auth2.init({
+            client_id: CLIENT_ID + '.apps.googleusercontent.com',
+            scope: 'profile'
+        })
+
+        setTimeout(isUserIn, 1000);
+
         
-        var valid = gapi.auth2.getAuthInstance().isSignedIn.get()
-        if (!gapi.auth2.getAuthInstance().isSignedIn.get()) {
-            // if user is not signed in
-            console.log("user not signed in " + valid)
-            // window.location.href = "/login"
-        }
+    });
+});
 
+function isUserIn() {
+    var valid = gapi.auth2.getAuthInstance().isSignedIn.get()
+    console.log("does user signed in? " + valid)
+    if(!valid) {
+        console.log("user not signed in.")
+        window.location.href = "/login"
+    }
+    else {
         verify_token()
-      });
-  });
-  
-
+    }
+}

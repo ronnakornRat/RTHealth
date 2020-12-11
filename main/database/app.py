@@ -193,7 +193,7 @@ def verify_token(user_id):
                         ret_val['status'] = 'ok'
                         # need to check expiry date
             # TO DO: check expiration time
-
+            print("idinfo", idinfo)
             print(json.dumps(idinfo, indent=4, sort_keys=True), file=sys.stderr)
             ret_val = {'data': userid,
                     'status': 'ok',
