@@ -17,13 +17,13 @@ WebRTC is a technology for a direct peer-to-peer real-time communication.
     - check the package sent, using wireshark
     - simulate some security attacks
 - compare it with existing WebRTC 
-## How do we do it
+## How we did it
 - for the application part, we build a real-time video chat application using Javascript for frontend, python for backend.
     - the signaling part we use peerJS library https://peerjs.com/
 - we also implement Google Oauth with backend authentication to further test our scenario (described below)
 
-## What do we found
-### the strength
+## What did we find
+### strengths
 - the real-time communication channel itself (powered by WebRTC) is very secure. It is as secure as web browser.
     - all communication is encrypted end-to-end
 ### vulnerabilities
